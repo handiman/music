@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+  {% assign timestamp = site.time | date: '%s' %}
+  {% capture site_name %}Music by {{ page.artist }}{% endcapture %}
+  {% capture cover_url %}{{ '/assets/img/folder.jpg' | absolute_url }}{% endcapture %}
+  {% if page.type == 'song' %}
+    {% capture title %}{{ page.title }} - {{ page.artist }} - {{ page.date | date: '%Y' }}{% endcapture %}
+  {% else %}
+    {% capture title %}{{ page.title }}{% endcapture %}
+  {% endif %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="{{ page.artist }}" />
+    <meta name="copyright" content="{{ page.artist }}" />
+    <meta name="og:title" content="{{ title }}" />
+    <meta name="og:site_name" content="{{ site_name }}" />
+    <meta property="twitter:title" content="{{ title }}" />
+    <meta property="twitter:site" content="{{ site_name }}" />
+    {% if page.type == 'song' %} 
+    <meta name="og:type" content="music.song" />
+    <meta name="og:image" content="{{ cover_url }}" />
+    <meta name="og:url" content="{{ page.url | absolute_url }}" />
+    <meta name="music:album:track" content="{{ page.date | date: '%-d' }}" />
+    <meta name="music:release_date" content="{{ page.date | date: '%-d' }}" />
+    <meta property="twitter:image" content="{{ cover_url }}" />
+    <meta property="twitter:audio:artist_name" content="{{ page.artist }}" />
+    {% endif %}
+    <title>{{ title }}</title>
+    <script src="https://kit.fontawesome.com/ceeaf2ba40.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/music.css' | absolute_url }}?v={{ timestamp }}" />
+  </head>
+
+  <body>
+    <main>
+      {{ content }}
+    </main>
+    <footer>
+      Copyright &copy; {{ page.artist }}. The music on this site is licensed under a <a href="{{ page.license.url }}" title="{{ page.license.name }}">{{ page.license.name }}</a> license.
+    </footer>
+    <script>
+      (function() {
+        'use strict';
+        var ping = function() {
+          console.log('Ping');
+          fetch('https://henrikbecker.azurewebsites.net/api/v1/ping').then(response => response.text()).then(response => console.log(response));
+        }, handle = window.setInterval(ping, 30000);
+        document.addEventListener('unload', function() { window.clearInterval(handle); });
+        ping();
+      })();
+    </script>
+  </body>
+</html>

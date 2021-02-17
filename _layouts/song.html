@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<article class="song">
+  <header>
+    <div>
+      <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
+    </div>
+    <div>
+      <h1>{{ page.title }}</h1>
+      <div>{{ page.date | date: '%Y' }} {{ page.artist }}</div>
+      <div id="player">
+        <a href="javascript:void(0)" id="play" title="Play"><i class="fas fa-play"></i></a>
+        <a href="javascript:void(0)" id="pause" title="Pause"><i class="fas fa-pause"></i></a>
+      </div>
+    </div>
+  </header>
+  {{ content }}
+  <audio src="https://henrikbecker.azurewebsites.net/music/api/stream/{{ page.date | date: '%d' }}-{{ page.slug }}" />
+</article>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicComposition",
+  "name": {{ page.title | jsonify }},
+  "composer": {
+    "@type": "Person",
+    "name": {{ page.artist | jsonify }}
+  },
+  "lyrics": {
+    "@type": "CreativeWork",
+    "text": {{ content | strip_html | jsonify }}
+  },
+  "image": "https://www.henrikbecker.net/assets/img/folder.jpg",{% comment %}{{ "/assets/img/folder.jpg" | absolute_url  | jsonify }}{% endcomment %}
+  "inLanguage": "EN",
+  "datePublished": {{ page.date | date: '%Y' | jsonify }},
+  "author": {{ page.artist | jsonify }},
+  "license": {{ page.license.url | jsonify }}
+}
+</script>
+<script>
+  (function() {
+    'use strict';
+    var player = document.getElementsByTagName('audio')[0],
+    play = function() {
+      if (player.src && player.src !== '') {
+        playButton.className = 'playing';
+        pauseButton.className = 'playing';
+        player.play();
+      }
+    },
+    pause = function() {
+      playButton.className = null;
+      pauseButton.className = null;
+      player.pause();
+    }, 
+    playButton = document.getElementById('play'),
+    pauseButton = document.getElementById('pause');
+    playButton.addEventListener('click', play);
+    pauseButton.addEventListener('click', pause);
+  })();
+</script>

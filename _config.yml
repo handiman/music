@@ -1,0 +1,29 @@
+defaults:
+ - scope:
+    path: ""
+   values: 
+    layout: default      
+    artist: Henrik Becker
+    license: 
+     name: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+     url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+ - scope:
+    path: ""
+    type: posts
+   values:
+     permalink: /songs/:year/:day-:slug
+     type: song
+     layout: song
+     
+sass:
+ style: compressed
+
+exclude:
+ - node_modules
+ - src
+ - README.md
+ - webpack.config.js
+ - tsconfig.json
+ - Gemfile*
+ - package*
+ - "*.orig"     
