@@ -11,17 +11,18 @@ defaults:
      name: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
      url: https://creativecommons.org/licenses/by-nc-sa/4.0/
  - scope:
-    path: /songs/*
+    path: /albums/*
    values:      
     type: album
     layout: album
+    permalink: /:basename/index.html
  - scope:
     path: ""
     type: posts
    values:
     type: song
     layout: song
-    permalink: /songs/:year/:day-:slug/index.html
+    permalink: /:year/:day-:slug/index.html
      
 sass:
  style: compressed
