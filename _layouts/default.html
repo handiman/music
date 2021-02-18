@@ -38,12 +38,7 @@
       <article class="{{ page.type | default: 'page' }}">
         {{ content }}
       </article>
-      <audio />
     </main>
-    <footer>
-      The music on this site is licensed under a <a href="{{ page.license.url }}" title="{{ page.license.name }}">{{ page.license.name }}</a> license.<br />
-      Copyright &copy; 2001 - {{ site.time | date: '%Y' }} <a href="{{ site.url | absolute_url }}">{{ page.artist }}</a>.
-    </footer>
     <script>
       (function() {
         'use strict';
@@ -55,27 +50,6 @@
         document.addEventListener('unload', function() { window.clearInterval(handle); });
         ping();
       })();
-      
-      (function(player) {
-        'use strict';
-        if (player) {
-          Array.prototype.forEach.call(document.getElementsByClassName('play'), function (element) {
-            console.log(element.dataset.streamUrl);
-            element.addEventListener('click', function(e) {
-              e.stopPropagation();
-              player.src = element.dataset.streamUrl;
-              player.play();
-            });
-          });
-          
-          Array.prototype.forEach.call(document.getElementsByClassName('pause'), function (element) {
-            element.addEventListener('click', function(e) {
-              e.stopPropagation();
-              player.pause();
-            });
-          });        
-        }
-      })(document.getElementsByTagName('audio')[0]);
     </script>
   </body>
 </html>

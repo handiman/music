@@ -1,11 +1,15 @@
 ---
 ---
-$background-color: #101010;
+$background-color: #000000;
 $text-color: #b8b6d3;
 $link-color: #e9e9e9;
 $font-family: Neucha, monospace, sans-serif;
 $font-size: 18px;
 $spacing: $font-size * 1;
+$cover-size: 160px;
+$cover-size-medium: $cover-size/1.5;
+$cover-size-small: $cover-size/2;
+$bp-mobile: 960px;
 
 * {
   vertical-align: baseline;
@@ -34,17 +38,59 @@ body {
   color: $text-color;
 }
 
-article {
-  min-height: 90vh;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: $spacing * 2;
+footer {
+  width: 100%;
+  display: table;
+  background-color: #090909;
+  opacity: .9;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  font-size: .8rem;
+  @media (max-width: $bp-mobile) {
+    display: block;
+  }
+  .copyright {
+    width: 380px;
+    @media (max-width: $bp-mobile) {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: $spacing;
+    }
+  }
+  .cover {
+    width: $cover-size-medium;
+    height: $cover-size-medium;
+    background-repeat: no-repeat;
+    background-size: $cover-size-medium $cover-size-medium;
+    @media (max-width: $bp-mobile) {
+      width: $cover-size-small;
+      height: $cover-size-small;
+      background-size: $cover-size-small $cover-size-small;
+    }
+  }
+  & > div {
+    display: table-cell;
+    vertical-align: middle;
+    @media (max-width: $bp-mobile) {
+      display: inline-block;
+    }
+  }
 }
 
-footer {
-  text-align: center;
-  width: 100%;
-  padding: $spacing;
+article {
+  min-height: 90vh;
+  max-width: $bp-mobile;
+  margin: 0 auto;
+  padding: $spacing * 2;
+  padding-bottom: $cover-size-medium + $spacing * 2;
+  @media (max-width: $bp-mobile) {
+    padding-bottom: $cover-size-small * 2 + $spacing * 2;
+  }
 }
 
 a, a:link, a:active, a:visited {
@@ -63,23 +109,20 @@ article.song, article.album {
     display: flex;
     margin-bottom: $spacing;
     img {
-      width: 160px;
-      height: 160px;
+      width: $cover-size;
+      height: $cover-size;
       margin-right: $spacing;
+      @media (max-width: $bp-mobile) {
+        width: $cover-size-medium;
+        height: $cover-size-medium;
+      }
     }
     h1 {
       margin-top: $spacing;
-      font-size: 2.5rem
-    }
-  }
-  @media (max-width: 600px) {
-    header {
-      h1 {
+      font-size: 2.5rem;
+      @media (max-width: $bp-mobile) {
         margin-top: 0;
-      }
-      img {
-        width: 80px;
-        height: 80px;
+        font-size: 2rem;
       }
     }
   }
@@ -88,6 +131,9 @@ article.song, article.album {
 .album {
   a {
     color: $text-color;
+  }
+  .player {
+    margin: 0;
   }
 }
 
@@ -98,6 +144,9 @@ article.song, article.album {
   }
   i {
     margin-right: $spacing / 2;
+    @media (max-width: $bp-mobile) {
+      font-size: .8rem;
+    }
   }
 }
 

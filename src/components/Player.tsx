@@ -40,7 +40,7 @@ export default (props: IProps) => {
   const classes = useStyles();
   const { track, album } = props;
   const backgroundImage = { backgroundImage: `url(${folderIcon})` };
-  var player: any;
+  const player = document.getElementsByTagName('audio')[0];
 
   const duration = () => player ? player.duration : 0;
   const currentType = () => player ? player.currentTime : 0;
@@ -52,13 +52,16 @@ export default (props: IProps) => {
   }, [track]);
 
   const play = () => {
-    if (player.src && player.src !== '') {
+    if (player && track) {
+      player.src = track.streamUrl;
       player.play();
     }
   }
 
   const pause = () => {
-    player.pause();
+    if (player) {
+      player.pause();
+    }
   }
 
   return (
@@ -81,7 +84,6 @@ export default (props: IProps) => {
           </small>
         </div>
       </Toolbar>
-      <audio controls={false} src={track ? track.streamUrl : ''} ref={ref => player = ref} />
     </AppBar>
   );
 }

@@ -49,25 +49,4 @@ layout: default
 }
 </script>
 
-<script>
-  (function() {
-    'use strict';
-    var player = document.getElementsByTagName('audio')[0],
-    play = function() {
-      if (player.src && player.src !== '') {
-        playButton.className = 'playing';
-        pauseButton.className = 'playing';
-        player.play();
-      }
-    },
-    pause = function() {
-      playButton.className = null;
-      pauseButton.className = null;
-      player.pause();
-    }, 
-    playButton = document.getElementById('play'),
-    pauseButton = document.getElementById('pause');
-    playButton.addEventListener('click', play);
-    pauseButton.addEventListener('click', pause);
-  })();
-</script>
+{% include player.html %}

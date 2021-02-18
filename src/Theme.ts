@@ -4,7 +4,7 @@ import { createMuiTheme } from "@material-ui/core";
 
 const linkColor = '#e9e9e9';
 const textColor = '#b8b6d3';
-const backgroundColor = '#101010';
+const backgroundColor = '#000000';
 
 const Theme = createMuiTheme({
   palette: {
