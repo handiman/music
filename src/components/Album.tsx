@@ -1,6 +1,6 @@
 import React from 'react';
 import { IAlbum, ITrack } from '.';
-import { List, ListItem, Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(_ => ({
   track: {
@@ -19,13 +19,13 @@ export default (props: {
   return (
     <React.Fragment>
       <Typography variant="h4" component="h4">{title}</Typography>
-      <List>
+      <ul>
         {tracks && tracks.map((track: ITrack, index: number) => (
-          <ListItem key={index} onClick={() => onTrackSelected(album, track)} className={classes.track}>
+          <li key={index} onClick={() => onTrackSelected(album, track)} className={classes.track}>
             {track.title}
-          </ListItem>
+          </li>
         ))}
-      </List>
+      </ul>
     </React.Fragment>
   );
 }

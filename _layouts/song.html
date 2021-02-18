@@ -1,23 +1,24 @@
 ---
 layout: default
 ---
-<article class="song">
-  <header>
-    <div>
-      <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
+{% assign year = page.date | date:  '%Y' %}
+{% assign album = year %}
+<header>
+  <div>
+    <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
+  </div>
+  <div>
+    <h1>{{ page.title }}</h1>
+    <div>{{ album }} {{ page.artist }}</div>
+    <div class="player">
+      <a href="javascript:void(0)" class="play" title="Play" data-stream-url="https://henrikbecker.azurewebsites.net/music/api/stream/{{ page.date | date: '%d' }}-{{ page.slug }}"><i class="fas fa-play"></i></a>
+      <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
     </div>
-    <div>
-      <h1>{{ page.title }}</h1>
-      <div>{{ page.date | date: '%Y' }} {{ page.artist }}</div>
-      <div id="player">
-        <a href="javascript:void(0)" id="play" title="Play"><i class="fas fa-play"></i></a>
-        <a href="javascript:void(0)" id="pause" title="Pause"><i class="fas fa-pause"></i></a>
-      </div>
-    </div>
-  </header>
-  {{ content }}
-  <audio src="https://henrikbecker.azurewebsites.net/music/api/stream/{{ page.date | date: '%d' }}-{{ page.slug }}" />
-</article>
+  </div>
+</header>
+
+{{ content }}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,13 +32,23 @@ layout: default
     "@type": "CreativeWork",
     "text": {{ content | strip_html | jsonify }}
   },
-  "image": "https://www.henrikbecker.net/assets/img/folder.jpg",{% comment %}{{ "/assets/img/folder.jpg" | absolute_url  | jsonify }}{% endcomment %}
+  "lyricist": {
+    "@type": "Person",
+    "name": {{ page.artist | jsonify }}
+  },
+  "url": {{ page.url | absolute_url | json }},
+  "image": {{ page.image | default: "/assets/img/folder.jpg" | absolute_url  | jsonify }},
   "inLanguage": "EN",
-  "datePublished": {{ page.date | date: '%Y' | jsonify }},
+  "datePublished": {{ year | jsonify }},
   "author": {{ page.artist | jsonify }},
-  "license": {{ page.license.url | jsonify }}
+  "license": {{ page.license.url | jsonify }},
+  "copyrightNotice": "Copyright {{ page.artist }}",
+  "copyrightYear": {{ year | jsonify }},
+  "encodingFormat": "audio/mpeg",
+  "genre": {{ page.genre | default: 'Noise' | jsonify }}
 }
 </script>
+
 <script>
   (function() {
     'use strict';

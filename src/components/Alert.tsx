@@ -1,22 +1,31 @@
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
 
 const useStyles = makeStyles(_ => ({
-  alert: {
+  root: {
     position: 'absolute',
     width: '100%',
-    top: '40vh',
+    height: '100vh',
+    top: 0,
+    left: 0,
     zIndex: 1,
-    textAlign: 'center'
+    display: 'table',
+    '& > div': {
+      display: 'table-cell',
+      textAlign: 'center',
+      verticalAlign: 'middle'
+    }
   }
 }));
 
 export default (props: any) => {
-  const classes = useStyles();
+  const { root } = useStyles();
 
   return (
-    <div className={classes.alert}>
-      {props.children}
+    <div className={root}>
+      <div>
+        {props.children}
+      </div>
     </div>
   );
 }

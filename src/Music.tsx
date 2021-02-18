@@ -59,14 +59,14 @@ export default () => {
     <>
       {renderSpinner() || renderError() || (
         <Container style={{ marginTop: 50, marginBottom: 170 }}>
-          <Grid container spacing={0} direction="row-reverse">
-            <Grid item md sm={12}>
-              <Lyrics track={track} />
-            </Grid>
-            <Grid item md sm={12}>
+          <Grid container spacing={0} direction="row">
+            <Grid item>
               {albums && albums.map((album: IAlbum, index: number) => (
                 <Album key={index} album={album} onTrackSelected={onTrackSelected} />
               ))}
+            </Grid>
+            <Grid item>
+              <Lyrics track={track} />
             </Grid>
           </Grid>
         </Container>

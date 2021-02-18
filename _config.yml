@@ -1,4 +1,5 @@
 url: https://www.henrikbecker.net
+permalink: pretty
 
 defaults:
  - scope:
@@ -10,12 +11,17 @@ defaults:
      name: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
      url: https://creativecommons.org/licenses/by-nc-sa/4.0/
  - scope:
+    path: /songs/*
+   values:      
+    type: album
+    layout: album
+ - scope:
     path: ""
     type: posts
    values:
-     permalink: /songs/:year/:day-:slug
-     type: song
-     layout: song
+    type: song
+    layout: song
+    permalink: /songs/:year/:day-:slug/index.html
      
 sass:
  style: compressed

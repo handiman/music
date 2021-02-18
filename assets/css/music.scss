@@ -35,6 +35,7 @@ body {
 }
 
 article {
+  min-height: 90vh;
   max-width: 960px;
   margin: 0 auto;
   padding: $spacing * 2;
@@ -42,11 +43,8 @@ article {
 
 footer {
   text-align: center;
-  position: fixed;
   width: 100%;
   padding: $spacing;
-  z-index: 1;
-  bottom: 0;
 }
 
 a, a:link, a:active, a:visited {
@@ -57,7 +55,7 @@ a, a:link, a:active, a:visited {
   }
 }
 
-.song {
+article.song, article.album {
   p {
     padding-bottom: $spacing;
   }
@@ -73,27 +71,6 @@ a, a:link, a:active, a:visited {
       margin-top: $spacing;
       font-size: 2.5rem
     }
-    #player {
-      margin-top: $spacing;
-      a {
-        color: $text-color;
-      }
-      i {
-        margin-right: $spacing / 2;
-        padding: $spacing / 4;
-      }
-    }
-    #play, #pause.playing {
-      i {
-        border: none;
-      }
-    }
-    #pause, #play.playing {
-      i {
-        border: 1px solid $text-color;
-        border-radius: $spacing / 5;
-      }
-    }
   }
   @media (max-width: 600px) {
     header {
@@ -105,5 +82,36 @@ a, a:link, a:active, a:visited {
         height: 80px;
       }
     }
+  }
+}
+
+.album {
+  a {
+    color: $text-color;
+  }
+}
+
+.player {
+  margin-top: $spacing;
+  a {
+    color: $text-color;
+  }
+  i {
+    margin-right: $spacing / 2;
+  }
+}
+
+.track {
+  .play, .pause {
+    font-size: .7rem;
+  }
+  & > div {
+    display: inline-block;
+  }
+  .player {
+    margin-right: 0; 
+  }
+  .lyrics {
+    display: none;
   }
 }

@@ -1,0 +1,60 @@
+---
+layout: default
+---
+{% assign title = page.name | split: '.' | first %}
+{% assign year = title %}
+{% assign tracks = '' | split: ',' %}
+{% for track in site.posts %}
+  {% assign track_year = track.date | date: '%Y' %}
+  {% if track_year == year %}
+    {% assign tracks = tracks | push: track %}
+  {% endif %}
+{% endfor %}
+<header>
+  <div>
+    <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
+  </div>
+  <div>
+    <h1>{{ title }}</h1>
+    <div>{{ page.artist }}</div>
+  </div>
+</header>
+
+<ul>{% for track in tracks reversed %} 
+  <li class="track">
+    <div class="player">
+      <a href="javascript:void(0)" class="play" title="Play" data-stream-url="https://henrikbecker.azurewebsites.net/music/api/stream/{{ track.date | date: '%d' }}-{{ track.slug }}"><i class="fas fa-play"></i></a>
+      <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+    </div>
+    <div><a href="{{ track.url }}">{{ track.title }}</a></div>
+    <div class="lyrics">
+      {{ track.content }}
+    </div>
+  </li>
+{% endfor %}</ul>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicAlbum",
+  "name": {{ title | jsonify }},
+  "byArtist": {
+    "@type": "Person",
+    "name": {{ page.artist | jsonify }}
+  },
+  "image": {{ page.image | default: "/assets/img/folder.jpg" | absolute_url  | jsonify }},
+  "inLanguage": "EN",
+  "datePublished": {{ title | jsonify }},
+  "author": {{ page.artist | jsonify }},
+  "license": {{ page.license.url | jsonify }},
+  "copyrightNotice": "Copyright {{ page.artist }}",
+  "copyrightYear": {{ year | jsonify }},
+  "genre": {{ page.genre | default: 'Noise' | jsonify }},
+  "numTracks": {{ tracks.size | default: '0' | jsonify }},
+  "track": [{% for track in tracks reversed %}{
+    "@type": "MusicRecording",
+    "name": {{ track.title | jsonify }},
+    "url": {{ track.url | replace: 'index.html', '' | absolute_url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}{% endfor %}]
+}
+</script>
