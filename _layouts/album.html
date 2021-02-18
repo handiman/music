@@ -12,11 +12,11 @@ layout: default
 {% endfor %}
 <header>
   <div>
-    <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
+    <img src="{{ '/assets/img/folder.jpg ' | relative_url }}" title="Album Cover" />
   </div>
   <div>
     <h1>{{ title }}</h1>
-    <div>{{ page.artist }}</div>
+    <div><a href="../../">{{ page.artist }}</a></div>
   </div>
 </header>
 
@@ -25,7 +25,7 @@ layout: default
     <div class="controls">
       <a href="javascript:void(0)" class="play" title="Play" data-album="{{ title }}" data-title="{{ track.title }}" data-stream-url="https://henrikbecker.azurewebsites.net/music/api/stream/{{ track.date | date: '%d' }}-{{ track.slug }}"><i class="fas fa-play"></i></a>
     </div>
-    <div><a href="{{ track.url | replace: 'index.html', '' | absolute_url }}">{{ track.title }}</a></div>
+    <div><a href="{{ track.url | replace: 'index.html', '' | relative_url }}">{{ track.title }}</a></div>
   </li>
 {% endfor %}</ul>
 
