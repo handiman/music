@@ -49,12 +49,23 @@ footer {
   z-index: 10;
   bottom: 0;
   left: 0;
-  font-size: .8rem;
   @media (max-width: $bp-mobile) {
+    font-size: .8rem;
     display: block;
+  }
+  .controls {
+    padding-left: $spacing * 2;
+    i:first-child {
+      padding-right: $spacing;
+      color: $text-color;
+    }
+    & > div {
+      display: inline-block;
+    }
   }
   .copyright {
     width: 380px;
+    font-size: .8rem;
     @media (max-width: $bp-mobile) {
       display: block;
       width: 100%;
@@ -102,6 +113,9 @@ a, a:link, a:active, a:visited {
 }
 
 article.song, article.album {
+  a {
+    color: $text-color;
+  }
   p {
     padding-bottom: $spacing;
   }
@@ -126,27 +140,25 @@ article.song, article.album {
       }
     }
   }
+  .controls {
+    i {
+      margin-right: $spacing / 2;
+      @media (max-width: $bp-mobile) {
+        font-size: .8rem;
+      }
+    }
+  }
+}
+
+.song {
+  .controls {
+    margin-top: $spacing;
+  }
 }
 
 .album {
-  a {
-    color: $text-color;
-  }
-  .player {
+  .controls {
     margin: 0;
-  }
-}
-
-.player {
-  margin-top: $spacing;
-  a {
-    color: $text-color;
-  }
-  i {
-    margin-right: $spacing / 2;
-    @media (max-width: $bp-mobile) {
-      font-size: .8rem;
-    }
   }
 }
 
@@ -157,10 +169,7 @@ article.song, article.album {
   & > div {
     display: inline-block;
   }
-  .player {
+  .controls {
     margin-right: 0; 
-  }
-  .lyrics {
-    display: none;
   }
 }

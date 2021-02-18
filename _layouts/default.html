@@ -39,6 +39,76 @@
         {{ content }}
       </article>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    {% unless page.layout == 'default' %}
+    <footer>
+      <div class="cover" style="background-image: url({{ '/assets/img/folder.jpg' | absolute_url }})" title="Album Cover"></div>
+      <div class="controls">
+        <div>
+          <a href="javascript:void(0)" class="play" title="Play"><i class="fas fa-play"></i></a>
+          <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+        </div>
+        <div>
+          <span class="track-title"></span>
+          <span class="album-title"></span>
+          <span class="progress"></span>
+        </div>
+      </div>
+      <div class="copyright">
+        The music on this site is licensed under a <a href="{{ page.license.url }}" title="{{ page.license.name }}">{{ page.license.name }}</a> license. 
+        Copyright &copy; 2017 - {{ site.time | date: '%Y' }} <a href="{{ site.url | absolute_url }}">{{ page.artist }}</a>.
+      </div>
+    </footer>
+    {% endunless %}
+    <audio />
+    <script>
+      (function(audio, controls) {
+        'use strict';
+         var trackTitle = controls.querySelector('.track-title'),
+           albumTitle = controls.querySelector('.album-title'),
+           progress = controls.querySelector('.progress');
+        
+        function showProgress() {
+          var duration = moment.utc(audio.duration * 1000).format("mm:ss");
+          var currentTime = moment.utc(audio.currentTime * 1000).format("mm:ss");
+          progress.innerHTML = `${currentTime}/${duration}`
+        };
+
+        audio.addEventListener('loadstart', function() {
+          progress.innerHTML = 'Loading...';
+        });
+        audio.addEventListener('timeupdate', showProgress);
+        audio.addEventListener('durationchange ', showProgress);
+
+        document.addEventListener('trackselected', function(e) {
+          var track = e.detail;
+          track.streamUrl && (audio.src = track.streamUrl);
+          track.title && (trackTitle.innerHTML = track.title);
+          track.album && (albumTitle.innerHTML = `(${track.album})`);
+          track.start && audio.src && audio.play();
+        });
+
+        Array.prototype.forEach.call(document.getElementsByClassName('play'), function (element) {
+          element.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var track = element.dataset;
+            document.dispatchEvent(new CustomEvent('trackselected', { detail: {
+              title: track.title,
+              album: track.album,
+              streamUrl: track.streamUrl,
+              start: true
+            }}));
+          });
+        });
+        
+        Array.prototype.forEach.call(document.getElementsByClassName('pause'), function (element) {
+          element.addEventListener('click', function(e) {
+            e.stopPropagation();
+            audio.pause();
+          });
+        }); 
+      })(document.querySelector('audio'), document.querySelector("footer .controls"));
+    </script>
     <script>
       (function() {
         'use strict';

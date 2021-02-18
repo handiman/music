@@ -22,14 +22,10 @@ layout: default
 
 <ul>{% for track in tracks reversed %} 
   <li class="track">
-    <div class="player">
-      <a href="javascript:void(0)" class="play" title="Play" data-stream-url="https://henrikbecker.azurewebsites.net/music/api/stream/{{ track.date | date: '%d' }}-{{ track.slug }}"><i class="fas fa-play"></i></a>
-      <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+    <div class="controls">
+      <a href="javascript:void(0)" class="play" title="Play" data-album="{{ title }}" data-title="{{ track.title }}" data-stream-url="https://henrikbecker.azurewebsites.net/music/api/stream/{{ track.date | date: '%d' }}-{{ track.slug }}"><i class="fas fa-play"></i></a>
     </div>
     <div><a href="{{ track.url | replace: 'index.html', '' | absolute_url }}">{{ track.title }}</a></div>
-    <div class="lyrics">
-      {{ track.content }}
-    </div>
   </li>
 {% endfor %}</ul>
 
@@ -58,5 +54,3 @@ layout: default
   }{% unless forloop.last %},{% endunless %}{% endfor %}]
 }
 </script>
-
-{% include player.html %}
