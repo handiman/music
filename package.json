@@ -36,5 +36,6 @@
     "url": "git+https://github.com/handiman/music.git"
   },
   "author": "Henrik Becker",
+  "license": "SEE LICENSE IN LICENSE",
   "homepage": "https://www.henrikbecker.net/music/"
 }
