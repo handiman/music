@@ -28,14 +28,19 @@
   }
   .controls {
     i {
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       margin-right: $spacing / 4;
       @media (max-width: $bp-mobile) {
-        font-size: 0.7rem;
+        font-size: 0.5rem;
       }
     }
   }
-  .track-list > li > div {
-    display: inline-block;
+  .track-list {
+    li {
+      padding-left: 2px;
+      div {
+        display: inline-block;
+      }
+    }
   }
 }
