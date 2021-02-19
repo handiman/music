@@ -3,12 +3,17 @@
   {% assign timestamp = site.time | date: '%s' %}
   {% capture site_name %}Music by {{ page.artist }}{% endcapture %}
   {% capture cover_url %}{{ '/assets/img/folder.jpg' | absolute_url }}{% endcapture %}
-  {% if page.type == 'song' %}
-    {% capture title %}{{ page.title }} - {{ page.artist }} - {{ page.date | date: '%Y' }}{% endcapture %}
-  {% else %}
-    {% capture title %}{{ page.title }}{% endcapture %}
-  {% endif %}
+  {% capture title %}
+    {% if page.layout == 'song' %}
+      {{ site_name }} | {{ page.title }} ({{ page.date | date: '%Y' }})
+    {% elsif page.layout == 'album' %}  
+      {{ site_name }} | {{ page.name | split: '.' | first }}
+    {% else %}
+      {{ site_name }}
+    {% endif %}
+  {% endcapture %}
   <head>
+    <title>{{ title }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="{{ page.artist }}" />
@@ -17,7 +22,7 @@
     <meta name="og:site_name" content="{{ site_name }}" />
     <meta property="twitter:title" content="{{ title }}" />
     <meta property="twitter:site" content="{{ site_name }}" />
-    {% if page.type == 'song' %} 
+    {% if page.layout == 'song' %} 
     <meta name="og:type" content="music.song" />
     <meta name="og:image" content="{{ cover_url }}" />
     <meta name="og:url" content="{{ page.url | absolute_url }}" />
@@ -26,23 +31,18 @@
     <meta property="twitter:image" content="{{ cover_url }}" />
     <meta property="twitter:audio:artist_name" content="{{ page.artist }}" />
     {% endif %}
-    <title>{{ title }}</title>
-    <script src="https://kit.fontawesome.com/ceeaf2ba40.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/music.css' | absolute_url }}?v={{ timestamp }}" />
   </head>
 
   <body>
     <main>
-      <article class="{{ page.type | default: 'page' }}">
+      <article class="{{ page.layout | default: 'page' }}">
         {{ content }}
       </article>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
-    {% unless page.layout == 'default' %}
     <footer>
-      <div class="cover" style="background-image: url({{ '/assets/img/folder.jpg' | absolute_url }})" title="Album Cover"></div>
+      <div class="album-cover" style="background-image: url({{ '/assets/img/folder.jpg' | absolute_url }})" title="Album Cover"></div>
       <div class="controls">
         <div>
           <a href="javascript:void(0)" class="play" title="Play"><i class="fas fa-play"></i></a>
@@ -59,8 +59,9 @@
         Copyright &copy; 2017 - {{ site.time | date: '%Y' }} <a href="{{ site.url | absolute_url }}">{{ page.artist }}</a>.
       </div>
     </footer>
-    {% endunless %}
     <audio />
+    <script src="https://kit.fontawesome.com/ceeaf2ba40.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <script>
       (function(audio, controls) {
         'use strict';
@@ -74,9 +75,8 @@
           progress.innerHTML = `${currentTime}/${duration}`
         };
 
-        audio.addEventListener('loadstart', function() {
-          progress.innerHTML = 'Loading...';
-        });
+        audio.addEventListener('loadstart', function() { progress.innerHTML = 'Loading...'; });
+        audio.addEventListener('canplay', showProgress);
         audio.addEventListener('timeupdate', showProgress);
         audio.addEventListener('durationchange ', showProgress);
 
@@ -109,17 +109,19 @@
         }); 
       })(document.querySelector('audio'), document.querySelector("footer .controls"));
     </script>
-    <script>
-      (function() {
-        'use strict';
-        var ping = function() {
-          console.log('Ping');
-          fetch('https://henrikbecker.azurewebsites.net/api/v1/ping').then(response => response.text()).then(response => console.log(response));
-        },
-        handle = window.setInterval(ping, 30000);
-        document.addEventListener('unload', function() { window.clearInterval(handle); });
-        ping();
-      })();
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Henrik Becker",
+      "nationality": "Swedish",
+      "birthDate": "1969-06-23",
+      "url": "https://www.henrikbecker.net",
+      "sameAs": [ 
+        "https://github.com/handiman",
+        "https://www.linkedin.com/prettygoodprogrammer"
+      ]
+    }
     </script>
   </body>
 </html>

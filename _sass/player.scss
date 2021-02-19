@@ -1,0 +1,43 @@
+footer {
+  width: 100%;
+  display: table;
+  background-color: #090909;
+  opacity: .9;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  @media (max-width: $bp-mobile) {
+    font-size: .8rem;
+    display: block;
+  }
+  .controls {
+    padding-left: $spacing * 2;
+    i:first-child {
+      padding-right: $spacing;
+      color: $text-color;
+    }
+    & > div {
+      display: inline-block;
+    }
+  }
+  .copyright {
+    width: 380px;
+    font-size: .8rem;
+    @media (max-width: $bp-mobile) {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: $spacing;
+    }
+  }
+  & > div {
+    display: table-cell;
+    vertical-align: middle;
+    @media (max-width: $bp-mobile) {
+      display: inline-block;
+    }
+  }
+}

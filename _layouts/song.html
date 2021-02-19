@@ -3,11 +3,9 @@ layout: default
 ---
 {% assign year = page.date | date:  '%Y' %}
 {% assign album = year %}
-{% capture streamUrl %}https://henrikbecker.azurewebsites.net/music/api/stream/{{ page.date | date: '%d' }}-{{ page.slug }}{% endcapture %}
+{% capture streamUrl %}{{ page.library_url }}/{{ album }}/{{ page.date | date: '%d' }}-{{ page.slug }}.mp3{% endcapture %}
 <header>
-  <div>
-    <img src="{{ '/assets/img/folder.jpg ' | absolute_url }}" title="Album Cover" />
-  </div>
+  <div class="album-cover" title="Album Cover"></div>
   <div>
     <h1>{{ page.title }}</h1>
     <div><a href="../">{{ album }}</a> <a href="{{ '/' | relative_url }}">{{ page.artist }}</a></div>

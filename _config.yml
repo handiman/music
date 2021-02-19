@@ -7,20 +7,20 @@ defaults:
    values: 
     layout: default      
     artist: Henrik Becker
+    cover_url: /assets/img/folder.jpg
+    library_url: https://henrikbeckerstorage.blob.core.windows.net/music
     license: 
      name: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
      url: https://creativecommons.org/licenses/by-nc-sa/4.0/
  - scope:
     path: /albums/*
    values:      
-    type: album
     layout: album
     permalink: /:basename/index.html
  - scope:
     path: ""
     type: posts
    values:
-    type: song
     layout: song
     permalink: /:year/:day-:slug/index.html
      

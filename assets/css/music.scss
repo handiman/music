@@ -7,169 +7,26 @@ $font-family: Neucha, monospace, sans-serif;
 $font-size: 18px;
 $spacing: $font-size * 1;
 $cover-size: 160px;
-$cover-size-medium: $cover-size/1.5;
-$cover-size-small: $cover-size/2;
+$cover-size-medium: 120px;
+$cover-size-small: 80px;
 $bp-mobile: 960px;
 
-* {
-  vertical-align: baseline;
-  font-weight: inherit;
-  font-family: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  border: 0 none;
-  outline: 0;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "https://fonts.googleapis.com/css2?family=Neucha&display=swap";
+@import "generic";
+@import "album";
+@import "player";
+@import "song";
 
-ul, ol {
-  list-style: none
-}
-
-html {
-  font-size: $font-size;
-  font-family: $font-family;
-}
-
-body {
-  background-color: $background-color;
-  color: $text-color;
-}
-
-footer {
-  width: 100%;
-  display: table;
-  background-color: #090909;
-  opacity: .9;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
+.album-cover {
+  width: $cover-size;
+  height: $cover-size;
+  margin-right:$spacing;
+  background-repeat: no-repeat;
+  background-image: url('{{ page.cover_url | absolute_url }}');
+  background-size: $cover-size $cover-size;
   @media (max-width: $bp-mobile) {
-    font-size: .8rem;
-    display: block;
-  }
-  .controls {
-    padding-left: $spacing * 2;
-    i:first-child {
-      padding-right: $spacing;
-      color: $text-color;
-    }
-    & > div {
-      display: inline-block;
-    }
-  }
-  .copyright {
-    width: 380px;
-    font-size: .8rem;
-    @media (max-width: $bp-mobile) {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: $spacing;
-    }
-  }
-  .cover {
-    width: $cover-size-medium;
-    height: $cover-size-medium;
-    background-repeat: no-repeat;
-    background-size: $cover-size-medium $cover-size-medium;
-    @media (max-width: $bp-mobile) {
-      width: $cover-size-small;
-      height: $cover-size-small;
-      background-size: $cover-size-small $cover-size-small;
-    }
-  }
-  & > div {
-    display: table-cell;
-    vertical-align: middle;
-    @media (max-width: $bp-mobile) {
-      display: inline-block;
-    }
-  }
-}
-
-article {
-  min-height: 90vh;
-  max-width: $bp-mobile;
-  margin: 0 auto;
-  padding: $spacing * 2;
-  padding-bottom: $cover-size-medium + $spacing * 2;
-  @media (max-width: $bp-mobile) {
-    padding-bottom: $cover-size-small * 2 + $spacing * 2;
-  }
-}
-
-a, a:link, a:active, a:visited {
-  color: $link-color;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-article.song, article.album {
-  a {
-    color: $text-color;
-  }
-  p {
-    padding-bottom: $spacing;
-  }
-  header {
-    display: flex;
-    margin-bottom: $spacing;
-    img {
-      width: $cover-size;
-      height: $cover-size;
-      margin-right: $spacing;
-      @media (max-width: $bp-mobile) {
-        width: $cover-size-medium;
-        height: $cover-size-medium;
-      }
-    }
-    h1 {
-      margin-top: $spacing;
-      font-size: 2.5rem;
-      @media (max-width: $bp-mobile) {
-        margin-top: 0;
-        font-size: 2rem;
-      }
-    }
-  }
-  .controls {
-    i {
-      margin-right: $spacing / 2;
-      @media (max-width: $bp-mobile) {
-        font-size: .8rem;
-      }
-    }
-  }
-}
-
-.song {
-  .controls {
-    margin-top: $spacing;
-  }
-}
-
-.album {
-  .controls {
-    margin: 0;
-  }
-}
-
-.track {
-  .play, .pause {
-    font-size: .7rem;
-  }
-  & > div {
-    display: inline-block;
-  }
-  .controls {
-    margin-right: 0; 
+    width: $cover-size-small;
+    height: $cover-size-small;
+    background-size: $cover-size-small $cover-size-small;
   }
 }

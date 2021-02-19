@@ -1,0 +1,22 @@
+<header>
+  <div class="album-cover" title="Album Cover"></div>
+  <div>
+    <h1><a href="{{ '/' | append: title | relative_url }}">{{ include.title }}</a></h1>
+    <div><a href="{{ '/' | relative_url }}">{{ page.artist }}</a></div>
+  </div>
+</header>
+{% assign tracks = '' | split: ',' %}
+{% for track in site.posts %}
+  {% assign track_year = track.date | date: '%Y' %}
+  {% if track_year == include.year %}
+    {% assign tracks = tracks | push: track %}
+  {% endif %}
+{% endfor %}
+<ul class="track-list">{% for track in tracks reversed %} 
+  <li>
+    <div class="controls">{% capture streamUrl %}{{ page.library_url }}/{{ include.title }}/{{ track.date | date: '%d' }}-{{ track.slug }}.mp3{% endcapture %}
+      <a href="javascript:void(0)" class="play" title="Play" data-album="{{ include.title }}" data-title="{{ track.title }}" data-stream-url="{{ streamUrl }}"><i class="fas fa-play"></i></a>
+    </div>
+    <div><a href="{{ track.url | replace: 'index.html', '' | relative_url }}">{{ track.title }}</a></div>
+  </li>
+{% endfor %}</ul>
