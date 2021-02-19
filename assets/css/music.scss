@@ -7,12 +7,14 @@ $font-family: Neucha, monospace, sans-serif;
 $font-size: 18px;
 $spacing: $font-size * 1;
 $cover-size: 160px;
-$cover-size-medium: 120px;
-$cover-size-small: 80px;
+$cover-size-medium: 130px;
+$cover-size-small: 90px;
 $bp-mobile: 960px;
+$bp-tiny: 320px;
 
 @import "https://fonts.googleapis.com/css2?family=Neucha&display=swap";
 @import "generic";
+@import "header";
 @import "album";
 @import "player";
 @import "song";

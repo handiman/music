@@ -42,4 +42,4 @@
       audio.pause();
     });
   }); 
-})(document.querySelector('audio'), document.querySelector("footer .controls"));
+})(document.querySelector('audio'), document.querySelector(".track-info"));

@@ -1,6 +1,7 @@
 footer {
   width: 100%;
-  display: table;
+  display: flex;
+  flex-wrap:wrap;
   background-color: #090909;
   opacity: .9;
   margin: 0;
@@ -11,33 +12,39 @@ footer {
   left: 0;
   @media (max-width: $bp-mobile) {
     font-size: .8rem;
-    display: block;
+    // display: block;
+  }
+  a, i {
+    color: $text-color;
+  }
+
+  .player {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .track-info {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding-left: $spacing;
+    @media (max-width: $bp-tiny) {
+      margin-top: $spacing;
+    }
   }
   .controls {
-    padding-left: $spacing * 2;
-    i:first-child {
-      padding-right: $spacing;
-      color: $text-color;
-    }
     & > div {
       display: inline-block;
     }
   }
+
   .copyright {
-    width: 380px;
+    width: 200px;
     font-size: .8rem;
     @media (max-width: $bp-mobile) {
-      display: block;
       width: 100%;
       text-align: center;
       padding: $spacing;
-    }
-  }
-  & > div {
-    display: table-cell;
-    vertical-align: middle;
-    @media (max-width: $bp-mobile) {
-      display: inline-block;
     }
   }
 }

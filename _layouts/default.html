@@ -42,21 +42,31 @@
       </article>
     </main>
     <footer>
-      <div class="album-cover" title="Album Cover"></div>
-      <div class="controls">
-        <div>
-          <a href="javascript:void(0)" class="play" title="Play"><i class="fas fa-play"></i></a>
-          <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+      <div class="player">
+        <div class="album-cover" title="Album Cover"></div>
+        <div class="table">
+          <div>
+            <a href="javascript:void(0)" class="play" title="Play"><i class="fas fa-play"></i></a>
+            <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+          </div>
         </div>
-        <div>
-          <span class="track-title"></span>
-          <span class="album-title"></span>
-          <span class="progress"></span>
+      </div>
+      <div class="track-info">
+        <div class="table">
+          <div>
+            <span class="track-title"></span>
+            <span class="album-title"></span>
+            <div class="progress"></div>
+          </div>
         </div>
       </div>
       <div class="copyright">
-        The music on this site is licensed under a <a href="{{ page.license.url }}" title="{{ page.license.name }}">{{ page.license.name }}</a> license. 
-        Copyright &copy; 2017 - {{ site.time | date: '%Y' }} <a href="{{ site.url | absolute_url }}">{{ page.artist }}</a>.
+        <div class="table">
+          <div>
+            The music on this site is licensed under a <a href="{{ page.license.url }}" title="{{ page.license.name }}">{{ page.license.name }}</a> license. 
+            Copyright &copy; 2017 - {{ site.time | date: '%Y' }} <a href="{{ site.url | absolute_url }}">{{ page.artist }}</a>.
+          </div>
+        </div>
       </div>
     </footer>
     <audio />
