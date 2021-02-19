@@ -11,7 +11,7 @@
     {% else %}
       {{ site_name }}
     {% endif %}
-  {% endcapture %}
+  {% endcapture %}{% assign title = title | strip %}
   <head>
     <title>{{ title }}</title>
     <meta charset="utf-8" />
@@ -27,7 +27,7 @@
     <meta name="og:image" content="{{ cover_url }}" />
     <meta name="og:url" content="{{ page.url | absolute_url }}" />
     <meta name="music:album:track" content="{{ page.date | date: '%-d' }}" />
-    <meta name="music:release_date" content="{{ page.date | date: '%-d' }}" />
+    <meta name="music:release_date" content="{{ page.date | date: '%Y' }}" />
     <meta property="twitter:image" content="{{ cover_url }}" />
     <meta property="twitter:audio:artist_name" content="{{ page.artist }}" />
     {% endif %}
@@ -37,7 +37,7 @@
 
   <body>
     <main>
-      <article class="{{ page.layout | default: 'page' }}">
+      <article class="{{ page.layout }}">
         {{ content }}
       </article>
     </main>
