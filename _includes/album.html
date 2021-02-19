@@ -15,7 +15,7 @@
 <ul class="track-list">{% for track in tracks reversed %} 
   <li>
     <div class="controls">{% capture streamUrl %}{{ page.library_url }}/{{ include.title }}/{{ track.date | date: '%d' }}-{{ track.slug }}.mp3{% endcapture %}
-      <a href="javascript:void(0)" class="play" title="Play" data-album="{{ include.title }}" data-title="{{ track.title }}" data-stream-url="{{ streamUrl }}"><i class="fas fa-play"></i></a>
+      <a class="play" title="Play" data-album="{{ include.title }}" data-title="{{ track.title }}" data-stream-url="{{ streamUrl }}"><i class="fas fa-play"></i></a>
     </div>
     <div><a href="{{ track.url | replace: 'index.html', '' | relative_url }}">{{ track.title }}</a></div>
   </li>

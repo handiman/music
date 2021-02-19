@@ -10,8 +10,8 @@ layout: default
     <h1>{{ page.title }}</h1>
     <div><a href="../">{{ album }}</a> <a href="{{ '/' | relative_url }}">{{ page.artist }}</a></div>
     <div class="controls">
-      <a href="javascript:void(0)" class="play" title="Play" data-album="{{ album }}" data-title="{{ page.title }}" data-stream-url="{{ streamUrl }}"><i class="fas fa-play"></i></a>
-      <a href="javascript:void(0)" class="pause" title="Pause"><i class="fas fa-pause"></i></a>
+      <a class="play" title="Play" data-album="{{ album }}" data-title="{{ page.title }}" data-stream-url="{{ streamUrl }}"><i class="fas fa-play"></i></a>
+      <a class="pause" title="Pause"><i class="fas fa-pause"></i></a>
     </div>
   </div>
 </header>

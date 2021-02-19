@@ -19,6 +19,10 @@ $bp-tiny: 320px;
 @import "player";
 @import "song";
 
+.play, .pause {
+  cursor: pointer;
+}
+
 .album-cover {
   width: $cover-size;
   height: $cover-size;
