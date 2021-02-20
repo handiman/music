@@ -2,6 +2,7 @@
 layout: default
 ---
 {% assign year = page.date | date:  '%Y' %}
+{% assign album = year %}
 {% capture streamUrl %}{{ page.library_url }}/{{ album }}/{{ page.date | date: '%d' }}-{{ page.slug }}.mp3{% endcapture %}
 <header>
   <div class="album-cover" title="Album Cover"></div>
