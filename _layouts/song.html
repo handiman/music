@@ -2,7 +2,6 @@
 layout: default
 ---
 {% assign year = page.date | date:  '%Y' %}
-{% assign album = year %}
 {% capture streamUrl %}{{ page.library_url }}/{{ album }}/{{ page.date | date: '%d' }}-{{ page.slug }}.mp3{% endcapture %}
 <header>
   <div class="album-cover" title="Album Cover"></div>
@@ -36,7 +35,7 @@ layout: default
     "name": {{ page.artist | jsonify }}
   },
   "url": {{ page.url | absolute_url | json }},
-  "image": {{ page.image | default: "/assets/img/folder.jpg" | absolute_url  | jsonify }},
+  "image": {{ page.cover_url | absolute_url  | jsonify }},
   "inLanguage": "EN",
   "datePublished": {{ year | jsonify }},
   "author": {{ page.artist | jsonify }},

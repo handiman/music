@@ -2,7 +2,6 @@
 <html lang="en-AU">
   {% assign timestamp = site.time | date: '%s' %}
   {% capture site_name %}Music by {{ page.artist }}{% endcapture %}
-  {% capture cover_url %}{{ '/assets/img/folder.jpg' | absolute_url }}{% endcapture %}
   {% capture title %}
     {% if page.layout == 'song' %}
       {{ site_name }} | {{ page.title }} ({{ page.date | date: '%Y' }})
@@ -20,10 +19,10 @@
     <meta name="copyright" content="{{ page.artist }}" />
     <meta name="og:title" content="{{ title }}" />
     <meta name="og:site_name" content="{{ site_name }}" />
-    <meta name="og:image" content="{{ cover_url }}" />
+    <meta name="og:image" content="{{ page.cover_url | absolute_url }}" />
     <meta property="twitter:title" content="{{ title }}" />
     <meta property="twitter:site" content="{{ site_name }}" />
-    <meta property="twitter:image" content="{{ cover_url }}" />
+    <meta property="twitter:image" content="{{ page.cover_url | absolute_url }}" />
     {% if page.layout == 'song' %} 
     <meta name="og:type" content="music.song" />
     <meta name="og:url" content="{{ page.url | absolute_url }}" />

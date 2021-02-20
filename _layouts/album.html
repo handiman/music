@@ -13,7 +13,7 @@ layout: default
     "@type": "Person",
     "name": {{ page.artist | jsonify }}
   },
-  "image": {{ page.image | default: "/assets/img/folder.jpg" | absolute_url  | jsonify }},
+  "image": {{ page.cover_url | absolute_url  | jsonify }},
   "inLanguage": "EN",
   "datePublished": {{ title | jsonify }},
   "author": {{ page.artist | jsonify }},
