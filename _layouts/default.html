@@ -20,15 +20,15 @@
     <meta name="copyright" content="{{ page.artist }}" />
     <meta name="og:title" content="{{ title }}" />
     <meta name="og:site_name" content="{{ site_name }}" />
+    <meta name="og:image" content="{{ cover_url }}" />
     <meta property="twitter:title" content="{{ title }}" />
     <meta property="twitter:site" content="{{ site_name }}" />
+    <meta property="twitter:image" content="{{ cover_url }}" />
     {% if page.layout == 'song' %} 
     <meta name="og:type" content="music.song" />
-    <meta name="og:image" content="{{ cover_url }}" />
     <meta name="og:url" content="{{ page.url | absolute_url }}" />
     <meta name="music:album:track" content="{{ page.date | date: '%-d' }}" />
     <meta name="music:release_date" content="{{ page.date | date: '%Y' }}" />
-    <meta property="twitter:image" content="{{ cover_url }}" />
     <meta property="twitter:audio:artist_name" content="{{ page.artist }}" />
     {% endif %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
